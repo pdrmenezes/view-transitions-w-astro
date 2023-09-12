@@ -19,8 +19,5 @@ const { city } = Astro.props as Props;
 ---
 
 <CitiesLayout title={city.name}>
-  <div class="text-white">
-    <a href="/">🏠</a>
-    <CityGrid id={id} pagePrefix="cities" />
-  </div>
+  <CityGrid id={id} pagePrefix="cities" />
 </CitiesLayout>
