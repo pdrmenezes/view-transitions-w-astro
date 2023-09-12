@@ -12,7 +12,7 @@ const selectedCity = cities.find((city) => city.id === selectedId);
       cities
         .filter((city) => city.id !== selectedId)
         .map((city) => (
-          <div class="p-1 w-full @container @md:w-1/2 @3xl:w-1/4">
+          <div class="p-1 w-full @container @md:w-1/2 @3xl:w-1/4" style={{ viewTransitionName: `city-${city.id}` }}>
             <a href={`/${pagePrefix}/${city.id}`}>
               <Card src={city.src} alt={city.name}>
                 <h1 class="text-md font-bold">{city.name}</h1>
