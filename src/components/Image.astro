@@ -1,0 +1,17 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"img"> & {
+  className?: string;
+  active?: boolean;
+};
+
+const { src, alt, width, height, crop, className, active } = {
+  width: 600,
+  height: 600,
+  crop: "fit",
+  ...Astro.props,
+};
+---
+
+<img src={src} alt={alt} width={width} height={height} class={className} />

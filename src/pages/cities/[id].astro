@@ -1,0 +1,26 @@
+---
+import type { GetStaticPaths, InferGetStaticParamsType, InferGetStaticPropsType } from "astro";
+import cities from "@data/cities";
+import CitiesLayout from "@layouts/CitiesLayout.astro";
+import CityGrid from "@components/CityGrid.astro";
+
+export const getStaticPaths = (async () => {
+  return cities.map((city) => ({
+    params: { id: city.id },
+    props: { city },
+  }));
+}) satisfies GetStaticPaths;
+
+type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { id } = Astro.params as Params;
+const { city } = Astro.props as Props;
+---
+
+<CitiesLayout title={city.name}>
+  <div class="text-white">
+    <a href="/">🏠</a>
+    <CityGrid id={id} pagePrefix="cities" />
+  </div>
+</CitiesLayout>

@@ -1,0 +1,36 @@
+---
+import Card from "./Card.astro";
+import cities from "@data/cities";
+
+const { id: selectedId, pagePrefix } = Astro.props;
+const selectedCity = cities.find((city) => city.id === selectedId);
+---
+
+<div class="flex flex-row flex-wrap">
+  <div class="flex @container flex-wrap w-full">
+    {
+      cities
+        .filter((city) => city.id !== selectedId)
+        .map((city) => (
+          <div class="p-1 w-full @container @md:w-1/2 @3xl:w-1/4">
+            <a href={`/${pagePrefix}/${city.id}`}>
+              <Card src={city.src} alt={city.name}>
+                <h1 class="text-md font-bold">{city.name}</h1>
+              </Card>
+            </a>
+          </div>
+        ))
+    }
+  </div>
+  <div class="w-full">
+    {
+      selectedCity && (
+        <div class="@container" style={{ viewTransitionName: `city-${selectedCity.id}` }}>
+          <Card src={selectedCity.src} alt={selectedCity.name} active>
+            <h1 class="text-3xl font-bold">{selectedCity.name}</h1>
+          </Card>
+        </div>
+      )
+    }
+  </div>
+</div>
